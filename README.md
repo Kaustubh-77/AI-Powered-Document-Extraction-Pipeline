@@ -24,7 +24,7 @@ Application stack: Python, Streamlit, LLM, APIs
 - Supports customization for domain-specific documents (e.g., medical, legal, financial).
 
 ### **Python Integration**
-- Extensive use of Python libraries such as Hugging Face Transformers, SpaCy, and NLTK.  
+- Extensive use of Python libraries such as Hugging Face Transformers, docx, Streamlit, and pypdf.  
 - API support for document ingestion and summary extraction.  
 - Modular design for easy integration into enterprise workflows.
 
