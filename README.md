@@ -1,6 +1,10 @@
 # AI-Powered-Document-Extraction-Pipeline
 This is the current version of the application built, commits to be made and pushed. The repo is for the reference and give a sneak peek and what the application is all about!
 
+Web App Interface:
+<img width="847" height="682" alt="WhatsApp Image 2026-06-16 at 23 48 38" src="https://github.com/user-attachments/assets/512f5b31-11fc-4186-8d9b-3f667963cc35" />
+
+
 Application stack: Python, Streamlit, LLM, APIs
 ## ⚙️ Technical Requirements
 
