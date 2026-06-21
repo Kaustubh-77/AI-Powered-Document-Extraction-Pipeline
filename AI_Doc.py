@@ -9,6 +9,7 @@ import builtins
 builtins.torch = torch
 builtins.torchvision = torchvision
 from transformers import pipeline
+from google import genai
 from openai import OpenAI
  
 
@@ -70,7 +71,7 @@ def process_information():
 
                 if not information_processed.strip():
                     st.warning("No extractable text found (likely scanned PDF).")
- 
+                # if st.button("Would you like ")
                 st.write("Extracted PDF text:")
                 st.write(information_processed[:500])
 
@@ -85,43 +86,42 @@ def process_information():
                 st.write("Extracted DOCX text:")
                 st.write(information_processed)
 
-    return information_processed
+    api_key = "API_KEY"
 
-# st.button("Generate Summary!",on_click=summarise_content())
-def summarise_content():
-    information = process_information()
-
-    # api_key=""
-    # client = OpenAI(api_key=api_key)
-    summary_model = pipeline("text-generation")
-    # model="facebook/bart-large-cnn"
-
-    prompt = f"Summarize the following text and give the best summary stating good insights, if it's a technical document and has codes, showcase all codes and explain what they do:\n\n{information}"
-    summary = summary_model(f"{information[:500]}", max_length=amount, min_length=50, return_full_text=False)
-    st.subheader("Here's the summary!")
-    st.write(summary[0]['generated_text'])
-#     response = client.responses.create(
-#     model="gpt-3.5-turbo",
-#     input=f"""
-#     Summarize the following document.
+    # client = OpenAI(api_key=aPI_key)
+    # if st.button("Summarise",icon="👍"):
+    #     summary_model = pipeline("text-generation",model="facebook/bart-large-cnn")
+    #     # model="facebook/bart-large-cnn"
+    #     print(information_processed)
+    prompt = f'''Summarize the following document, in {amount} words
     
-#     Document:
-#     {information}
+    Document:
+    {information_processed}
     
-#     Provide:
-#     1. Executive Summary
-#     2. Key Points
-#     3. Action Items
-#     """
-# )
-
-#     summary = response.output_text
-
-#     # Display in Streamlit:
-
-#     st.subheader("Document Summary")
-#     st.write(summary)
+    Provide:
+    1. Executive Summary
+    2. Key Points
+    3. Action Items'''
+    #     summary = summary_model(input=prompt, max_length=300, min_length=50,do_sample=False)
+    #     st.subheader("Here's the summary!")
+    #     st.write(summary[0])
 
 
+    client = OpenAI(
+        api_key=api_key,
+        base_url="BASE_URL"
+    )
 
-summarise_content()
+    response = client.chat.completions.create(
+        
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+    st.write("Here's the summary")
+    st.write(response.choices[0].message.content)
+
+
+
+process_information()
